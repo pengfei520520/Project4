@@ -77,9 +77,9 @@ public class PostDriver {
                     do {
                         counter = 0;
                         for (int i = 0; i < posts.size(); i++) {
-                            if (posts.get(i).getAuthor().equals(profile.getAuthor)) {
+                            if (posts.get(i).getAuthor().equals(profile.getAuthor())) {
                                 counter++;
-                                System.out.println("(" + counter + ") " + formatPost(posts.get(i)) + "\n");
+                                System.out.println("\n(" + counter + ") " + formatPost(posts.get(i)));
                                 userPosts.add(posts.get(i));
                                 userPostNum.add(i);
                             }
@@ -152,14 +152,14 @@ public class PostDriver {
                     int input2 = 0; //input from user for post selection
                     ArrayList<Integer> userPostNum2 = new ArrayList<>();
 
-                    //gets a list of posts that the user is allowed to edit
+                    //gets a list of posts that the user is allowed to delete
                     System.out.println("Select a post to delete:");
                     do {
                         counter2 = 0;
                         for (int i = 0; i < posts.size(); i++) {
-                            if (posts.get(i).getAuthor().equals(profile.getAuthor)) {
+                            if (posts.get(i).getAuthor().equals(profile.getAuthor())) {
                                 counter2++;
-                                System.out.println("(" + counter2 + ") " + formatPost(posts.get(i)) + "\n");
+                                System.out.println("\n(" + counter2 + ") " + formatPost(posts.get(i)));
                                 userPostNum2.add(i);
                             }
                         }
@@ -177,9 +177,11 @@ public class PostDriver {
                         }
                     } while (counter2 == -1);
 
+                    //deletes post from list
                     if (input2 != 0) {
                         input2--;
-                        posts.remove(userPostNum2.get(input2));
+                        int deleteIndex = userPostNum2.get(input2); //index of the post to be deleted.
+                        posts.remove(deleteIndex);
                     }
                     break;
 
@@ -271,8 +273,8 @@ public class PostDriver {
      * @return the formatted string
      */
     public String formatPost(Post post) {
-        String output = post.getTitle() + "\n" + "post.getAuthor()" + "\n" + post.getContent() + "\n" +
-                post.getTime(); //----------------------author---------------------------------------------------------
+        String output = post.getTitle() + "\n" + post.getAuthor() + "\n" + post.getContent() + "\n" +
+                post.getTime();
         return output;
     }
 }
