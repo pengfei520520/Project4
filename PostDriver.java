@@ -49,7 +49,7 @@ public class PostDriver {
                     String title = scan.nextLine();
 
                     //gets author
-                    String author = profile.getAuthor();
+                    String author = profile.getName();
 
                     //gets content
                     System.out.println("Enter the content of your post:");
@@ -77,7 +77,7 @@ public class PostDriver {
                     do {
                         counter = 0;
                         for (int i = 0; i < posts.size(); i++) {
-                            if (posts.get(i).getAuthor().equals(profile.getAuthor())) {
+                            if (posts.get(i).getAuthor().equals(profile.getName())) {
                                 counter++;
                                 System.out.println("\n(" + counter + ") " + formatPost(posts.get(i)));
                                 userPosts.add(posts.get(i));
@@ -157,7 +157,7 @@ public class PostDriver {
                     do {
                         counter2 = 0;
                         for (int i = 0; i < posts.size(); i++) {
-                            if (posts.get(i).getAuthor().equals(profile.getAuthor())) {
+                            if (posts.get(i).getAuthor().equals(profile.getName())) {
                                 counter2++;
                                 System.out.println("\n(" + counter2 + ") " + formatPost(posts.get(i)));
                                 userPostNum2.add(i);
