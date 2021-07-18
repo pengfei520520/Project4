@@ -188,7 +188,7 @@ public class PostDriver {
                 //view all posts
                 case "4":
                     for (int i = 0; i < posts.size(); i++) {
-                        System.out.println(formatPost(posts.get(i)) + "\n");
+                        System.out.println("\n" + formatPost(posts.get(i)));
                     }
                     break;
 
