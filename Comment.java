@@ -20,54 +20,54 @@ public class Comment {
     }
 
     /**
-     * gets the author of the post
+     * gets the author of the comment
      *
-     * @return post author
+     * @return comment author
      */
     public String getAuthor() {
         return author;
     }
 
     /**
-     * sets the author of the post
+     * sets the author of the comment
      *
-     * @param author author of the post to be set
+     * @param author author of the comment to be set
      */
     public void setAuthor(String author) {
         this.author = author;
     }
 
     /**
-     * gets the content of the post
+     * gets the content of the comment
      *
-     * @return post content
+     * @return comment content
      */
     public String getContent() {
         return content;
     }
 
     /**
-     * sets the content of the post
+     * sets the content of the comment
      *
-     * @param content content of the post to be set
+     * @param content content of the comment to be set
      */
     public void setContent(String content) {
         this.content = content;
     }
 
     /**
-     * gets the timestamp of the post
+     * gets the timestamp of the comment
      *
-     * @return post timestamp
+     * @return comment timestamp
      */
     public String getTime() {
         return time;
     }
 
     /**
-     * sets the timestamp of the post
+     * sets the timestamp of the comment
      *
-     * @param time timestamp of the post to be set
+     * @param time timestamp of the comment to be set
      */
     public void setTime(String time) {
         this.time = time;
