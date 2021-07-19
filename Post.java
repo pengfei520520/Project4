@@ -100,7 +100,7 @@ public class Post {
      * sets the comments list of the post
      * @param comments comment list of the post to be set
      */
-    public void setTime(ArrayList<Comment> comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 }
