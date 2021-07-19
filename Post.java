@@ -97,10 +97,10 @@ public class Post {
     }
 
     /**
-     * sets the comments list of the post
+     * adds a comment to the list of comments
      * @param comment comment list of the post to be set
      */
-    public void addComments(Comment comment) {
+    public void addComment(Comment comment) {
         comments.add(comment);
     }
 }
