@@ -198,6 +198,7 @@ public class PostDriver {
 
                 //create, edit, or delete a comment
                 case "6":
+                    new CommentEditor(profile, posts);
                     break;
 
                 //import post
@@ -236,6 +237,11 @@ public class PostDriver {
                 posts.add(new Post(line, bufferedReader.readLine(), bufferedReader.readLine(),
                         bufferedReader.readLine()));
                 line = bufferedReader.readLine();
+                while (line != null && line.equals("Comment:")) {
+                    posts.get(posts.size() - 1).addComment(new Comment(bufferedReader.readLine(),
+                            bufferedReader.readLine(), bufferedReader.readLine()));
+                    line = bufferedReader.readLine();
+                }
             }
         } catch (FileNotFoundException e) {
             try {
@@ -276,6 +282,13 @@ public class PostDriver {
     public String formatPost(Post post) {
         String output = post.getTitle() + "\n" + post.getAuthor() + "\n" + post.getContent() + "\n" +
                 post.getTime();
+        String outputComments = "";
+        for (int i = 0; i < post.getComments().size(); i++) {
+            outputComments += "\nComment:\n";
+            outputComments += post.getComments().get(i).getAuthor() + "\n" + post.getComments().get(i).getContent() +
+            "\n" + post.getComments().get(i).getTime();
+        }
+        output += outputComments;
         return output;
     }
 }

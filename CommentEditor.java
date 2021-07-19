@@ -15,7 +15,6 @@ public class CommentEditor {
     Scanner s = new Scanner(System.in);
     boolean quit = false;
 
-
     public CommentEditor (Profile profile, ArrayList<Post> allPosts) {
 
         do {
