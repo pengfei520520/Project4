@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Date;
+import java.util.*;
 import java.sql.Timestamp;
 
 /**
@@ -187,6 +185,8 @@ public class PostDriver {
 
                 //view all posts
                 case "4":
+                    Collections.sort(posts, new SortByDate());
+
                     for (int i = 0; i < posts.size(); i++) {
                         System.out.println("\n" + formatPost(posts.get(i)));
                     }

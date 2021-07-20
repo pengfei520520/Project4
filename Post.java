@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Post class
@@ -110,5 +111,27 @@ public class Post {
      */
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    /**
+     * gets the time in seconds
+     * @return time in seconds
+     */
+    public double getTimeSeconds() {
+        double year = Double.parseDouble(time.substring(0, 4));
+        double month = Double.parseDouble(time.substring(5, 7));
+        double day = Double.parseDouble(time.substring(8, 10));
+        double hour = Double.parseDouble(time.substring(11, 13));
+        double minute = Double.parseDouble(time.substring(14, 16));
+        double second = Double.parseDouble(time.substring(17, 23));
+
+        year = year * 365 * 24 * 60 * 60;
+        month = month * 30 * 24 * 60 * 60;
+        day = day * 24 * 60 * 60;
+        hour = hour * 60 * 60;
+        minute = minute * 60;
+
+        double output = year + month + day + hour + minute + second;
+        return output;
     }
 }
