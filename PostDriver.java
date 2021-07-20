@@ -121,7 +121,7 @@ public class PostDriver {
                                 //edit content
                                 case "2":
                                     System.out.println("Enter the new content");
-                                    userPosts.get(input1).setAuthor(scan.nextLine());
+                                    userPosts.get(input1).setContent(scan.nextLine());
                                     quit2 = false;
                                     break;
 

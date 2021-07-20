@@ -20,9 +20,9 @@ public class SortByDate implements Comparator<Post> {
     public int compare(Post post1, Post post2) {
         int output;
 
-        if (post1.getTimeSeconds() >= post2.getTimeSeconds()) {
+        if (post1.getTimeSeconds() <= post2.getTimeSeconds()) {
             output = 1;
-        } else if (post1.getTimeSeconds() < post2.getTimeSeconds()) {
+        } else if (post1.getTimeSeconds() > post2.getTimeSeconds()) {
             output = -1;
         } else {
             output = 0;

@@ -51,12 +51,6 @@ public class PostCSVHandler {
 		} catch (IOException e) {
 			System.out.println("Error happens when importing from csv!");
 			list.clear();
-		} finally {
-			try {
-				bfr.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 
 		return list;

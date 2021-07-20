@@ -16,8 +16,8 @@ public class ProfileUsage {
     public static void main(String[] args) {
         String signOption; //1 if creating new account 2 if signing in
         String name; //Name on profile
-        String age; //Age of the user
-        String gender; //Gender of profile
+        String age = null; //Age of the user
+        String gender = null; //Gender of profile
         String password; //The password of the user
         String newPassword; //A string that states whether the the user wants to remake their password
         Profile userProfile = null; //Profile the user creates or logs into
@@ -58,7 +58,7 @@ public class ProfileUsage {
                     //For loop that goes through all the names in the list of profile names
                     for (int ct = 0; ct < profileList.size(); ct++) {
                         if (profileList.get(ct).getName().equals(name)) {
-                            System.out.println("The profile name you have creates already exists. Choose a new name");
+                            System.out.println("The profile name you have creates already exists. You can not use it.");
                             nameExists = true;
                             break;
                         }
@@ -70,39 +70,39 @@ public class ProfileUsage {
                 name = scanner.nextLine();
             }
 
-            //do while loop that makes sure the user inputs an integer
-            do {
-                ageIncorrect = false;
-                //Asks user for age and allows them to input it
-                System.out.println("Enter your age: ");
-                age = scanner.nextLine();
-
-                //Loop that goes through all characters in age string to make sure it is a positive integer
-                for (int ct = 0; ct < age.length(); ct++) {
-                    ageIncorrect = false;
-                    //Gets ascii value of each character in age
-                    char ageChar = age.charAt(ct);
-                    int ascii = ageChar;
-
-                    //Occurs if the number is negative
-                    if (ascii == 45) {
-                        System.out.println("Please enter a non negative integer for your age!");
-                        ageIncorrect = true;
-                        break;
-                    } else if (ascii < 48 || ascii > 57) { //Occurs if age has a character that is not a number
-                        System.out.println("Please enter your age as an integer!");
-                        ageIncorrect = true;
-                        break;
-                    }
-                }
-            } while (ageIncorrect);
-
-            //Asks the user to input their gender and allows them to input
-            System.out.println("Please input your gender (Male, Female, or your chosen gender):");
-            gender = scanner.nextLine();
-
-            //Asks the user to create the password for their account
             if (signOption.equals("1")) {
+
+                //do while loop that makes sure the user inputs an integer
+                do {
+                    ageIncorrect = false;
+                    //Asks user for age and allows them to input it
+                    System.out.println("Enter your age: ");
+                    age = scanner.nextLine();
+
+                    //Loop that goes through all characters in age string to make sure it is a positive integer
+                    for (int ct = 0; ct < age.length(); ct++) {
+                        ageIncorrect = false;
+                        //Gets ascii value of each character in age
+                        char ageChar = age.charAt(ct);
+                        int ascii = ageChar;
+
+                        //Occurs if the number is negative
+                        if (ascii == 45) {
+                            System.out.println("Please enter a non negative integer for your age!");
+                            ageIncorrect = true;
+                            break;
+                        } else if (ascii < 48 || ascii > 57) { //Occurs if age has a character that is not a number
+                            System.out.println("Please enter your age as an integer!");
+                            ageIncorrect = true;
+                            break;
+                        }
+                    }
+                } while (ageIncorrect);
+
+                //Asks the user to input their gender and allows them to input
+                System.out.println("Please input your gender (Male, Female, or your chosen gender):");
+                gender = scanner.nextLine();
+
                 //A do while loop that continues until password is strong or the user wants to keep their password
                 do {
                     System.out.println("Please create a password for your profile");
@@ -154,7 +154,7 @@ public class ProfileUsage {
 
                 } while (newPassword.equals("Yes"));
             } else {
-                System.out.println("Please create a password for your profile");
+                System.out.println("Please type in your password for your profile");
                 password = scanner.nextLine();
             }
 
@@ -162,10 +162,6 @@ public class ProfileUsage {
             if (signOption.equals("1")) {
                 userProfile = new Profile(name, age, gender, password);
                 profileList.add(userProfile);
-                System.out.println(userProfile.getName());
-                System.out.println(userProfile.getAge());
-                System.out.println(userProfile.getGender());
-                System.out.println(userProfile.getPassword());
             } else {
                 int listSize = profileList.size();
 
@@ -188,7 +184,8 @@ public class ProfileUsage {
                     }
 
                     if (ct == listSize - 1) {
-                        System.out.println("The username and password you have used does not correlate to any account");
+                        System.out.println("The username and/or password you have used does not correlate to any " +
+                                "account");
                         accountReal = true;
                     }
                 }
@@ -202,9 +199,9 @@ public class ProfileUsage {
             //A do while loop that occurs until an option is chosen
             do {
                 //Allows user to pick an action to do on profile
-                System.out.println("Choose an option:\n1. Change name of your profile\n2.Change age on your profile");
+                System.out.println("Choose an option:\n1. Change name of your profile\n2. Change age on your profile");
                 System.out.println("3. Change your gender on your profile\n4. Change your password of your profile");
-                System.out.println("5. Create new post, edit old post, or delete old post\n6. Exit");
+                System.out.println("5. Access Social Media App\n6. Exit");
                 optionString = scanner.nextLine();
 
                 //Grabs ASCII value of first character chosen to check if it is a number between 1 and 8.
@@ -212,8 +209,8 @@ public class ProfileUsage {
                 int ascii = optionChar;
 
                 //Selection structure that occurs if number 1-8 was not chosen
-                if (ascii < 48 || ascii > 55 || optionString.length() < 1) {
-                    System.out.println("Choose an option 1-8!");
+                if (ascii < 49 || ascii > 54 || optionString.length() < 1) {
+                    System.out.println("Choose an option 1-6!");
                 } else {
                     break;
                 }
@@ -225,33 +222,45 @@ public class ProfileUsage {
             if (option == 1) {
                 System.out.println("Enter new name of profile");
                 String newName = scanner.nextLine();
+                int profileMadeCt = 0;
 
                 for (int ct = 0; ct < profileList.size(); ct++) {
                     if (profileList.get(ct).getName().equals(newName)) {
+                        profileMadeCt++;
                         System.out.println("The profile name you have creates already exists. Choose a new name");
                         break;
                     }
                 }
-                userProfile.setName(newName);
-            } else if (option == 2) {
-                System.out.println("Enter new age on profile");
-                age = scanner.nextLine();
-                for (int ct = 0; ct < age.length(); ct++) {
-                    //Gets ascii value of each character in age
-                    char ageChar = age.charAt(ct);
-                    int ascii = ageChar;
-
-                    //Occurs if the number is negative
-                    if (ascii == 45) {
-                        System.out.println("Please enter a non negative integer for your age!");
-                        ageIncorrect = true;
-                        break;
-                    } else if (ascii < 48 || ascii > 57) { //Occurs if age has a character that is not a number
-                        System.out.println("Please enter your age as an integer!");
-                        ageIncorrect = true;
-                        break;
-                    }
+                if (profileMadeCt == 0) {
+                    userProfile.setName(newName);
                 }
+            } else if (option == 2) {
+                //do while loop that makes sure the user inputs an integer
+                do {
+                    ageIncorrect = false;
+                    //Asks user for age and allows them to input it
+                    System.out.println("Enter your age: ");
+                    age = scanner.nextLine();
+
+                    //Loop that goes through all characters in age string to make sure it is a positive integer
+                    for (int ct = 0; ct < age.length(); ct++) {
+                        ageIncorrect = false;
+                        //Gets ascii value of each character in age
+                        char ageChar = age.charAt(ct);
+                        int ascii = ageChar;
+
+                        //Occurs if the number is negative
+                        if (ascii == 45) {
+                            System.out.println("Please enter a non negative integer for your age!");
+                            ageIncorrect = true;
+                            break;
+                        } else if (ascii < 48 || ascii > 57) { //Occurs if age has a character that is not a number
+                            System.out.println("Please enter your age as an integer!");
+                            ageIncorrect = true;
+                            break;
+                        }
+                    }
+                } while (ageIncorrect);
                 userProfile.setAge(age);
             } else if (option == 3) {
                 System.out.println("Please input your gender (Male, Female, or your chosen gender):");
@@ -298,7 +307,7 @@ public class ProfileUsage {
                         System.out.println("Would you like to create a stronger password (Yes/No)?");
                         newPassword = scanner.nextLine();
 
-                        //Prints error mesage if yes or no is not chosen
+                        //Prints error message if yes or no is not chosen
                         if (!newPassword.equals("Yes") && !newPassword.equals("No")) {
                             System.out.println("Please choose Yes or No!");
                         } else {
@@ -307,7 +316,12 @@ public class ProfileUsage {
                     } while (true);
 
                 } while (newPassword.equals("Yes"));
-            } else if (option == 8) {
+
+                userProfile.setPassword(password);
+            } else if (option == 5) {
+               // PostDriver driver = new PostDriver(userProfile);
+
+            } else if (option == 6) {
                 System.out.println("Logging out");
                 usage.saveAllProfiles(profileList);
                 return;
@@ -345,6 +359,7 @@ public class ProfileUsage {
             printWriter.close();
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("profiles.txt"));
 
+            //Writes into file in a loop
             for (int i = 0; i < profileList.size(); i++) {
                 bufferedWriter.write(formatProfile(profileList.get(i)));
                 bufferedWriter.newLine();
@@ -356,6 +371,7 @@ public class ProfileUsage {
         }
     }
 
+    //Formats the profile parameters so it can be put into a file
     public String formatProfile(Profile profile) {
         String output = profile.getName() + "\n" + profile.getAge() + "\n" + profile.getGender() + "\n" +
                 profile.getPassword();
