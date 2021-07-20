@@ -203,7 +203,7 @@ public class PostDriver {
 
                 //import post
                 case "7":
-                	PostCSVHandler.getInstance().importFromCSV(scan);
+                    posts.addAll(PostCSVHandler.getInstance().importFromCSV(scan));
                     break;
 
                 //export post
