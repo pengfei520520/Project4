@@ -43,20 +43,7 @@ public class PostCSVHandler {
 				String content = datas[2];
 				// update time
 				String time = new Timestamp(new Date().getTime()).toString(); // datas[3];
-				Post post = new Post(title, author, content, time);
-				
-				if (datas.length == 5) {
-					String[] commentDatas = datas[4].split(";");
-					ArrayList<Comment> commentArr = new ArrayList<Comment>();
-					for (int i = 0; i < commentDatas.length; i++) {
-						String[] comments = commentDatas[i].split(" ");
-						commentArr.add(new Comment(comments[0], comments[1], comments[2]));
-					}
-					
-					post.setComments(commentArr);
-				}
-				
-				list.add(post);
+				list.add(new Post(title, author, content, time));
 			}
 			System.out.printf("%s imported!\n", csvFile);
 		} catch (FileNotFoundException e) {
@@ -85,18 +72,7 @@ public class PostCSVHandler {
 			pw = new PrintWriter(new File(csvFile));
 			for (int i = 0; i < list.size(); i++) {
 				Post cPost = list.get(i);
-				ArrayList<Comment> comments = cPost.getComments();
-				StringBuilder stringBuilder = new StringBuilder();
-				int size = comments.size();
-				for (int j = 0; j < size; j++) {
-					Comment comment = comments.get(j);
-					stringBuilder.append(comment.getAuthor() + " " + comment.getContent() + " " + comment.getTime());
-					if (j != size - 1) {
-						stringBuilder.append(";");
-					}
-				}
-				pw.printf("%s,%s,%s,%s,%s\n", cPost.getTitle(), cPost.getAuthor(), cPost.getContent(), cPost.getTime(),
-						stringBuilder.toString());
+				pw.printf("%s,%s,%s,%s\n", cPost.getTitle(), cPost.getAuthor(), cPost.getContent(), cPost.getTime());
 			}
 			System.out.printf("%s saved!\n", csvFile);
 		} catch (FileNotFoundException e) {
@@ -105,13 +81,4 @@ public class PostCSVHandler {
 			pw.close();
 		}
 	}
-
-	// Test only
-	public static void main(String[] args) throws FileNotFoundException {
-		Scanner scanner = new Scanner(System.in);
-		ArrayList<Post> list = PostCSVHandler.getInstance().importFromCSV(scanner);
-		PostCSVHandler.getInstance().saveToCSV(list, scanner);
-		scanner.close();
-	}
-
 }
