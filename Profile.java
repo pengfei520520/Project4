@@ -14,9 +14,10 @@ public class Profile {
     private String name;
     private int age;
     private String gender;
+    private String password;
 
     //Constructor that takes name, age, and gender
-    public Profile(String name, int age, String gender) {
+    public Profile(String name, int age, String gender, String password) {
         this.name = name;
         this.age = age;
 
@@ -24,14 +25,14 @@ public class Profile {
         String lowerGender = gender.toLowerCase();
 
         //Selection structure that determines the gender of the profile
-        if (lowerGender.equals("boy") || lowerGender.equals("man") || lowerGender.equals("male")) {
+        if (lowerGender.equals("male")) {
             this.gender = "Male";
-        } else if (lowerGender.equals("girl") || lowerGender.equals("woman") || lowerGender.equals("female")) {
+        } else if (lowerGender.equals("female")) {
             this.gender = "Female";
         } else {
-            this.gender = "Other";
+            this.gender = gender;
         }
-        this.gender = gender;
+        this.password = password;
     }
 
     //Method that gets name
@@ -47,5 +48,30 @@ public class Profile {
     //Method that gets gender
     public String getGender() {
         return gender;
+    }
+
+    //Method that gets the password
+    public String getPassword() {
+        return password;
+    }
+
+    //Able to change name on the account
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //Able to change age on the account
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    //Able to change gender on the account
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    //ABle to change password on the account
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
