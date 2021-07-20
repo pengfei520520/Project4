@@ -319,7 +319,7 @@ public class ProfileUsage {
 
                 userProfile.setPassword(password);
             } else if (option == 5) {
-               // PostDriver driver = new PostDriver(userProfile);
+               PostDriver driver = new PostDriver(userProfile);
 
             } else if (option == 6) {
                 System.out.println("Logging out");

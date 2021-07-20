@@ -35,11 +35,9 @@ public class CommentEditor {
                     author = s.nextLine();
                     System.out.println("What is the title of the post would you like to create a comment on?");
                     title = s.nextLine();
-                    boolean valid = false;
-                    for (int i = 0; i < allPosts.size(); i++) {
+                    for (Post post : allPosts) {
                         //searches all posts from all users
-                        if (title.equalsIgnoreCase(allPosts.get(i).getTitle()) &&
-                        allPosts.get(i).getAuthor().equalsIgnoreCase(author)) {
+                        if (title.equalsIgnoreCase(post.getTitle()) && post.getAuthor().equalsIgnoreCase(author)) {
                             //if the title and the author match,
                             // then get the content from user and add to posts comments
                             System.out.println("What would you like the comment to say?");
@@ -49,13 +47,11 @@ public class CommentEditor {
                             Timestamp timestamp = new Timestamp(time);
                             String timeStampString = "" + timestamp;
                             Comment addedComment = new Comment(profile.getName(), content, timeStampString);
-                            allPosts.get(i).getComments().add(addedComment);
-                            valid = true;
-                            break;
+                            post.getComments().add(addedComment);
+
+                        } else {
+                            System.out.println("Invalid input, try again");
                         }
-                    }
-                    if (!valid) {
-                        System.out.println("Invalid input, try again");
                     }
                     break;
                 case "2":
@@ -66,8 +62,7 @@ public class CommentEditor {
                     title = s.nextLine();
 
                     for (Post post : allPosts) {
-                        if (title.equalsIgnoreCase(post.getTitle()) && post.getAuthor().equalsIgnoreCase(author) &&
-                        post.getComments().size() != 0) {
+                        if (title.equalsIgnoreCase(post.getTitle()) && post.getAuthor().equalsIgnoreCase(author)) {
                             //search through all posts and if the title matches and the author of the post matches
                             //and the author of the comment is the current user then delete it
                             System.out.println("What is the content of the comment would you like to delete?");
@@ -76,18 +71,15 @@ public class CommentEditor {
                                 if (post.getComments().get(i).getAuthor().equals(profile.getName()) &&
                                         post.getComments().get(i).getContent().equals(commentContent)) {
                                     post.getComments().remove(post.getComments().get(i));
-                                    break;
-                                } else if (i == post.getComments().size() &&
-                                        !commentContent.equals(post.getComments().get(i).getContent())) {
-                                    System.out.println("Invalid input, try again");
-                                    break;
+
                                 }
+
                             }
-                            break;
+
                         } else {
                             System.out.println("Invalid input, try again");
-                            break;
                         }
+
                     }
                     break;
 
@@ -96,7 +88,7 @@ public class CommentEditor {
                     title = s.nextLine();
                     for (Post post : allPosts) {
                         //looks through all posts
-                        if (title.equalsIgnoreCase(post.getTitle()) && post.getComments().size() != 0) {
+                        if (title.equalsIgnoreCase(post.getTitle())) {
                             //if the title matches then
                             System.out.println("What is the content of the comment would you like to edit?");
                             String commentContent = s.nextLine();
@@ -111,22 +103,20 @@ public class CommentEditor {
                                     long time = date.getTime();
                                     Timestamp timestamp = new Timestamp(time);
                                     String timeStampString = "" + timestamp;
-
-                                    post.getComments().get(i).setAuthor(profile.getName());
-                                    post.getComments().get(i).setContent(newCommentContent);
-                                    post.getComments().get(i).setTime(timeStampString);
-                                    break;
-                                } else if (i == post.getComments().size() &&
-                                        !commentContent.equals(post.getComments().get(i).getContent())) {
+                                    Comment newComment = new Comment(profile.getName(), newCommentContent,
+                                            timeStampString);
+                                    post.getComments().add(i, newComment);
+                                } else {
                                     System.out.println("Invalid input, try again");
-                                    break;
                                 }
+
+
                             }
-                            break;
+
                         } else {
                             System.out.println("Invalid input, try again");
-                            break;
                         }
+
                     }
                     break;
 
