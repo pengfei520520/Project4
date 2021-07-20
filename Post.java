@@ -103,4 +103,12 @@ public class Post {
     public void addComment(Comment comment) {
         comments.add(comment);
     }
+
+    /**
+     * sets comments list
+     * @param comments comment list of the post to be set
+     */
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
 }
