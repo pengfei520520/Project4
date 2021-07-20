@@ -203,11 +203,12 @@ public class PostDriver {
 
                 //import post
                 case "7":
-
+                	PostCSVHandler.getInstance().importFromCSV(scanner);
                     break;
 
                 //export post
                 case "8":
+                	PostCSVHandler.getInstance().saveToCSV(list, scanner);
                     break;
 
                 //quit
