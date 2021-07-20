@@ -89,5 +89,3 @@ public class PostCSVHandler {
 		PostCSVHandler.getInstance().saveToCSV(list, scanner);
 		scanner.close();
 	}
-
-}
