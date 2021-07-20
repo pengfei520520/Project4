@@ -1,12 +1,22 @@
-
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ *
+ * ProfileUsage
+ *
+ * Allows user to create their own profile and do several different actions with their file/
+ *
+ * @author Mikie Kilbourne, L04
+ *
+ * @version July 19th, 2021
+ */
 public class ProfileUsage {
     public static void main(String[] args) {
         String signOption; //1 if creating new account 2 if signing in
         String name; //Name on profile
-        int age; //Age of the user
+        String age; //Age of the user
         String gender; //Gender of profile
         String password; //The password of the user
         String newPassword; //A string that states whether the the user wants to remake their password
@@ -15,10 +25,11 @@ public class ProfileUsage {
         boolean nameExists; //False if name does not already exist, true if name does already exist
         boolean ageIncorrect; //False if age is possible, true if age is not possible
         boolean accountReal; //True if account is real. False if account does not exist
-        String ageString; //age in string form
 
         Scanner scanner = new Scanner(System.in);
+        ProfileUsage usage = new ProfileUsage();
 
+        usage.getAllProfiles(profileList);
         //Continues until user is signed up, signed in to an account that already exists, or exits
         do {
             accountReal = false;
@@ -31,6 +42,7 @@ public class ProfileUsage {
                     System.out.println("Please choose option 1, 2, or 3!");
                 } else if (signOption.equals("3")) {
                     System.out.println("Exiting. Have a good day!");
+                    usage.saveAllProfiles(profileList);
                     return;
                 }
             } while (!signOption.equals("1") && !signOption.equals("2"));
@@ -63,12 +75,13 @@ public class ProfileUsage {
                 ageIncorrect = false;
                 //Asks user for age and allows them to input it
                 System.out.println("Enter your age: ");
-                ageString = scanner.nextLine();
+                age = scanner.nextLine();
 
                 //Loop that goes through all characters in age string to make sure it is a positive integer
-                for (int ct = 0; ct < ageString.length(); ct++) {
+                for (int ct = 0; ct < age.length(); ct++) {
+                    ageIncorrect = false;
                     //Gets ascii value of each character in age
-                    char ageChar = ageString.charAt(ct);
+                    char ageChar = age.charAt(ct);
                     int ascii = ageChar;
 
                     //Occurs if the number is negative
@@ -83,9 +96,6 @@ public class ProfileUsage {
                     }
                 }
             } while (ageIncorrect);
-
-            //Changes the age from a string to an integer
-            age = Integer.parseInt(ageString);
 
             //Asks the user to input their gender and allows them to input
             System.out.println("Please input your gender (Male, Female, or your chosen gender):");
@@ -192,9 +202,9 @@ public class ProfileUsage {
             //A do while loop that occurs until an option is chosen
             do {
                 //Allows user to pick an action to do on profile
-                System.out.println("Choose an option:\n1. Change name of your profile\n2.Change age on profile");
+                System.out.println("Choose an option:\n1. Change name of your profile\n2.Change age on your profile");
                 System.out.println("3. Change your gender on your profile\n4. Change your password of your profile");
-                System.out.println("5. Create new post\n6. Edit old post\n7. Delete old post\n8. Exit");
+                System.out.println("5. Create new post, edit old post, or delete old post\n6. Exit");
                 optionString = scanner.nextLine();
 
                 //Grabs ASCII value of first character chosen to check if it is a number between 1 and 8.
@@ -202,7 +212,7 @@ public class ProfileUsage {
                 int ascii = optionChar;
 
                 //Selection structure that occurs if number 1-8 was not chosen
-                if (ascii < 48 || ascii > 56 || optionString.length() < 1) {
+                if (ascii < 48 || ascii > 55 || optionString.length() < 1) {
                     System.out.println("Choose an option 1-8!");
                 } else {
                     break;
@@ -225,10 +235,10 @@ public class ProfileUsage {
                 userProfile.setName(newName);
             } else if (option == 2) {
                 System.out.println("Enter new age on profile");
-                ageString = scanner.nextLine();
-                for (int ct = 0; ct < ageString.length(); ct++) {
+                age = scanner.nextLine();
+                for (int ct = 0; ct < age.length(); ct++) {
                     //Gets ascii value of each character in age
-                    char ageChar = ageString.charAt(ct);
+                    char ageChar = age.charAt(ct);
                     int ascii = ageChar;
 
                     //Occurs if the number is negative
@@ -242,20 +252,115 @@ public class ProfileUsage {
                         break;
                     }
                 }
-                age = Integer.parseInt(ageString);
                 userProfile.setAge(age);
             } else if (option == 3) {
                 System.out.println("Please input your gender (Male, Female, or your chosen gender):");
                 gender = scanner.nextLine();
                 userProfile.setGender(gender);
             } else if (option == 4) {
-                System.out.println("Please input new password");
-                password = scanner.nextLine();
-                userProfile.setPassword(password);
+                do {
+                    System.out.println("Please create a new password for your profile");
+                    password = scanner.nextLine();
+
+                    //Counters for amount of numbers or special characters in password
+                    int passwordNum = 0;
+                    int passwordSpecial = 0;
+
+                    //For loop that goes through all the characters of the password to tell the strength of the password
+                    for (int ct = 0; ct < password.length(); ct++) {
+                        //Gets ascii value of each character in the password
+                        char passwordChar = password.charAt(ct);
+                        int ascii = passwordChar;
+
+                        //Increments passwordNum if the password has a number in it
+                        if (ascii > 47 && ascii < 58) {
+                            passwordNum++;
+                        } else if (ascii < 64 || (ascii > 90 && ascii < 97) || ascii > 122) {
+                            passwordSpecial++; //Increments passwordSpecial if password has a special character in it
+                        }
+                    }
+
+                    //Selection structures that state the strength level of the password
+                    if (passwordNum == 0 && passwordSpecial == 0) {
+                        System.out.println("Your new password is weak. There are no numbers or special characters");
+                    } else if (passwordNum == 0) {
+                        System.out.println("Your new password is medium. There are no numbers in your password");
+                    } else if (passwordSpecial == 0) {
+                        System.out.println("Your new password is medium. There are no special characters in your " +
+                                "password");
+                    } else {
+                        System.out.println("Your new password is strong");
+                        break;
+                    }
+
+                    //A do while loop that continues until you choose yes or no
+                    do {
+                        System.out.println("Would you like to create a stronger password (Yes/No)?");
+                        newPassword = scanner.nextLine();
+
+                        //Prints error mesage if yes or no is not chosen
+                        if (!newPassword.equals("Yes") && !newPassword.equals("No")) {
+                            System.out.println("Please choose Yes or No!");
+                        } else {
+                            break;
+                        }
+                    } while (true);
+
+                } while (newPassword.equals("Yes"));
             } else if (option == 8) {
                 System.out.println("Logging out");
+                usage.saveAllProfiles(profileList);
                 return;
             }
         } while (true);
     }
+
+
+    //Saves all profiles into a file at the end of the program
+    public void getAllProfiles(ArrayList<Profile> profileList) {
+        try {
+            FileReader reader = new FileReader("profiles.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                profileList.add(new Profile(line, bufferedReader.readLine(), bufferedReader.readLine(),
+                        bufferedReader.readLine()));
+                line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                PrintWriter printWriter = new PrintWriter("posts.txt");
+            } catch (IOException e2) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Writes all the profiles into a file at the end of the program
+    public void saveAllProfiles(ArrayList<Profile> profileList) {
+        try {
+            PrintWriter printWriter = new PrintWriter("profiles.txt");
+            printWriter.close();
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("profiles.txt"));
+
+            for (int i = 0; i < profileList.size(); i++) {
+                bufferedWriter.write(formatProfile(profileList.get(i)));
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String formatProfile(Profile profile) {
+        String output = profile.getName() + "\n" + profile.getAge() + "\n" + profile.getGender() + "\n" +
+                profile.getPassword();
+        return output;
+    }
 }
+
+

@@ -12,12 +12,12 @@
 
 public class Profile {
     private String name;
-    private int age;
+    private String age;
     private String gender;
     private String password;
 
     //Constructor that takes name, age, and gender
-    public Profile(String name, int age, String gender, String password) {
+    public Profile(String name, String age, String gender, String password) {
         this.name = name;
         this.age = age;
 
@@ -41,7 +41,7 @@ public class Profile {
     }
 
     //Method that gets age
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
@@ -61,7 +61,7 @@ public class Profile {
     }
 
     //Able to change age on the account
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

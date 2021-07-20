@@ -194,6 +194,8 @@ public class PostDriver {
 
                 //search for all of a user's comments and posts
                 case "5":
+                    SearchCommentPost search = new SearchCommentPost(posts);
+                    search.searchPosts();
                     break;
 
                 //create, edit, or delete a comment

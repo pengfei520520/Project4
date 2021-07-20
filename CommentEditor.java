@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 public class CommentEditor {
     Scanner s = new Scanner(System.in);
     boolean quit = false;
+
 
     public CommentEditor (Profile profile, ArrayList<Post> allPosts) {
 
@@ -47,6 +49,8 @@ public class CommentEditor {
                             Comment addedComment = new Comment(profile.getName(), content, timeStampString);
                             post.getComments().add(addedComment);
 
+                        } else {
+                            System.out.println("Invalid input, try again");
                         }
                     }
                     break;
@@ -72,6 +76,8 @@ public class CommentEditor {
 
                             }
 
+                        } else {
+                            System.out.println("Invalid input, try again");
                         }
 
                     }
@@ -99,12 +105,16 @@ public class CommentEditor {
                                     String timeStampString = "" + timestamp;
                                     Comment newComment = new Comment(profile.getName(), newCommentContent,
                                             timeStampString);
-                                    post.getComments().add(newComment);
+                                    post.addComment(newComment);
+                                } else {
+                                    System.out.println("Invalid input, try again");
                                 }
 
 
                             }
 
+                        } else {
+                            System.out.println("Invalid input, try again");
                         }
 
                     }
