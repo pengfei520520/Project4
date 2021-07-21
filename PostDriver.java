@@ -210,7 +210,7 @@ public class PostDriver {
 
                 //export post
                 case "8":
-                	PostCSVHandler.getInstance().saveToCSV(posts, scan);
+                    PostCSVHandler.getInstance().saveToCSV(posts, scan);
                     break;
 
                 //quit
@@ -272,13 +272,14 @@ public class PostDriver {
             }
 
             bufferedWriter.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * formats the post to be saved or printed
+     *
      * @param post the post to be formatted
      * @return the formatted string
      */
@@ -289,7 +290,7 @@ public class PostDriver {
         for (int i = 0; i < post.getComments().size(); i++) {
             outputComments += "\nComment:\n";
             outputComments += post.getComments().get(i).getAuthor() + "\n" + post.getComments().get(i).getContent() +
-            "\n" + post.getComments().get(i).getTime();
+                    "\n" + post.getComments().get(i).getTime();
         }
         output += outputComments;
         return output;

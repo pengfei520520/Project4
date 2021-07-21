@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * Post class
@@ -27,6 +26,7 @@ public class Post {
 
     /**
      * gets the title of the post
+     *
      * @return post title
      */
     public String getTitle() {
@@ -35,6 +35,7 @@ public class Post {
 
     /**
      * sets the title of the post
+     *
      * @param title title of the post to be set
      */
     public void setTitle(String title) {
@@ -43,6 +44,7 @@ public class Post {
 
     /**
      * gets the author of the post
+     *
      * @return post author
      */
     public String getAuthor() {
@@ -51,6 +53,7 @@ public class Post {
 
     /**
      * sets the author of the post
+     *
      * @param author author of the post to be set
      */
     public void setAuthor(String author) {
@@ -59,6 +62,7 @@ public class Post {
 
     /**
      * gets the content of the post
+     *
      * @return post content
      */
     public String getContent() {
@@ -67,6 +71,7 @@ public class Post {
 
     /**
      * sets the content of the post
+     *
      * @param content content of the post to be set
      */
     public void setContent(String content) {
@@ -75,6 +80,7 @@ public class Post {
 
     /**
      * gets the timestamp of the post
+     *
      * @return post timestamp
      */
     public String getTime() {
@@ -83,6 +89,7 @@ public class Post {
 
     /**
      * sets the timestamp of the post
+     *
      * @param time timestamp of the post to be set
      */
     public void setTime(String time) {
@@ -91,6 +98,7 @@ public class Post {
 
     /**
      * gets the comment list of the post
+     *
      * @return post comments
      */
     public ArrayList<Comment> getComments() {
@@ -99,6 +107,7 @@ public class Post {
 
     /**
      * adds a comment to the list of comments
+     *
      * @param comment comment list of the post to be set
      */
     public void addComment(Comment comment) {
@@ -107,6 +116,7 @@ public class Post {
 
     /**
      * sets comments list
+     *
      * @param comments comment list of the post to be set
      */
     public void setComments(ArrayList<Comment> comments) {
@@ -115,6 +125,7 @@ public class Post {
 
     /**
      * gets the time in seconds
+     *
      * @return time in seconds
      */
     public double getTimeSeconds() {

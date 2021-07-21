@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
  * Runs searching based on author names, then return post and comment related
  *
@@ -15,6 +16,7 @@ public class SearchCommentPost {
     String[] upperCaseCommentsNmaes;
     int size;
     boolean found = false;
+
     public SearchCommentPost(ArrayList<Post> posts) {
         this.posts = posts;
         size = 0;

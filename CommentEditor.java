@@ -17,7 +17,7 @@ public class CommentEditor {
     boolean quit = false;
 
 
-    public CommentEditor (Profile profile, ArrayList<Post> allPosts) {
+    public CommentEditor(Profile profile, ArrayList<Post> allPosts) {
 
         do {
             // takes in input to choose what action to take

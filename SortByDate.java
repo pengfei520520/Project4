@@ -13,6 +13,7 @@ public class SortByDate implements Comparator<Post> {
 
     /**
      * Compares the time of two posts
+     *
      * @param post1 first post to be compared
      * @param post2 second post to be compared
      * @return comparison between both posts
