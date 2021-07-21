@@ -3,11 +3,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
+ *
  * ProfileUsage
- * <p>
+ *
  * Allows user to create their own profile and do several different actions with their file/
  *
  * @author Mikie Kilbourne, L04
+ *
  * @version July 19th, 2021
  */
 public class ProfileUsage {
@@ -64,7 +66,7 @@ public class ProfileUsage {
                 } while (nameExists);
             } else { //Occurs if the user is signing in
                 //Asks user for their name and allows them to input it
-                System.out.println("Insert name for profile (no numbers): ");
+                System.out.println("Insert name of profile: ");
                 name = scanner.nextLine();
             }
 
@@ -163,6 +165,12 @@ public class ProfileUsage {
             } else {
                 int listSize = profileList.size();
 
+                //Occurs if there are no profiles in the profile list
+                if (listSize == 0) {
+                    System.out.println("The username and/or password you have used does not correlate to any " +
+                            "account");
+                    accountReal = true;
+                }
                 //Goes through all the profiles in the list
                 for (int ct = 0; ct < listSize; ct++) {
                     int attributeCt = 0;
@@ -171,8 +179,7 @@ public class ProfileUsage {
                     //Selection structure to check if name and password equal name and password of searchedProfile
                     if (searchedProfile.getName().equals(name)) {
                         attributeCt++;
-                    }
-                    if (searchedProfile.getPassword().equals(password)) {
+                    } if (searchedProfile.getPassword().equals(password)) {
                         attributeCt++;
                     }
 
@@ -318,7 +325,7 @@ public class ProfileUsage {
 
                 userProfile.setPassword(password);
             } else if (option == 5) {
-                PostDriver driver = new PostDriver(userProfile);
+               PostDriver driver = new PostDriver(userProfile);
 
             } else if (option == 6) {
                 profileList.remove(userProfile);
@@ -369,7 +376,7 @@ public class ProfileUsage {
             }
 
             bufferedWriter.close();
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
