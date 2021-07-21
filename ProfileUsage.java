@@ -3,13 +3,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- *
  * ProfileUsage
- *
+ * <p>
  * Allows user to create their own profile and do several different actions with their file/
  *
  * @author Mikie Kilbourne, L04
- *
  * @version July 19th, 2021
  */
 public class ProfileUsage {
@@ -179,7 +177,8 @@ public class ProfileUsage {
                     //Selection structure to check if name and password equal name and password of searchedProfile
                     if (searchedProfile.getName().equals(name)) {
                         attributeCt++;
-                    } if (searchedProfile.getPassword().equals(password)) {
+                    }
+                    if (searchedProfile.getPassword().equals(password)) {
                         attributeCt++;
                     }
 
@@ -325,7 +324,7 @@ public class ProfileUsage {
 
                 userProfile.setPassword(password);
             } else if (option == 5) {
-               PostDriver driver = new PostDriver(userProfile);
+                PostDriver driver = new PostDriver(userProfile);
 
             } else if (option == 6) {
                 profileList.remove(userProfile);
@@ -376,7 +375,7 @@ public class ProfileUsage {
             }
 
             bufferedWriter.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
