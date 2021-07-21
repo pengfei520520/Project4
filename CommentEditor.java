@@ -1,8 +1,8 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Searches for and edits, creates, and deletes comments
@@ -29,7 +29,7 @@ public class CommentEditor {
 
             switch (input) {
                 case "1":
-
+                    boolean commentAdded = false;
                     //gets author and title of post
                     System.out.println("What is the Author of the post would you like to create a comment on?");
                     author = s.nextLine();
@@ -40,6 +40,7 @@ public class CommentEditor {
                         if (title.equalsIgnoreCase(post.getTitle()) && post.getAuthor().equalsIgnoreCase(author)) {
                             //if the title and the author match,
                             // then get the content from user and add to posts comments
+
                             System.out.println("What would you like the comment to say?");
                             String content = s.nextLine();
                             Date date = new Date();
@@ -48,13 +49,19 @@ public class CommentEditor {
                             String timeStampString = "" + timestamp;
                             Comment addedComment = new Comment(profile.getName(), content, timeStampString);
                             post.getComments().add(addedComment);
+                            commentAdded = true;
+                            break;
 
-                        } else {
-                            System.out.println("Invalid input, try again");
                         }
+
                     }
+                    if (commentAdded == false) {
+                        System.out.println("Invalid input, try again");
+                    }
+
                     break;
                 case "2":
+                    commentAdded = false;
                     //get author and title of post to delete pre existing comment
                     System.out.println("What is the Author of the post would you like to delete a comment on?");
                     author = s.nextLine();
@@ -65,25 +72,31 @@ public class CommentEditor {
                         if (title.equalsIgnoreCase(post.getTitle()) && post.getAuthor().equalsIgnoreCase(author)) {
                             //search through all posts and if the title matches and the author of the post matches
                             //and the author of the comment is the current user then delete it
+
                             System.out.println("What is the content of the comment would you like to delete?");
                             String commentContent = s.nextLine();
                             for (int i = 0; i < post.getComments().size(); i++) {
                                 if (post.getComments().get(i).getAuthor().equals(profile.getName()) &&
                                         post.getComments().get(i).getContent().equals(commentContent)) {
                                     post.getComments().remove(post.getComments().get(i));
+                                    commentAdded = true;
+                                    break;
 
                                 }
-
                             }
 
-                        } else {
-                            System.out.println("Invalid input, try again");
                         }
 
                     }
+                    if (commentAdded == false) {
+                        System.out.println("Invalid input, try again");
+                    }
+
                     break;
 
                 case "3":
+
+                    commentAdded = false;
                     System.out.println("What is the title of the post would you like to edit a comment on?");
                     title = s.nextLine();
                     for (Post post : allPosts) {
@@ -105,18 +118,24 @@ public class CommentEditor {
                                     String timeStampString = "" + timestamp;
                                     Comment newComment = new Comment(profile.getName(), newCommentContent,
                                             timeStampString);
-                                    post.getComments().add(i, newComment);
-                                } else {
-                                    System.out.println("Invalid input, try again");
+                                    post.getComments().remove(i);
+                                    post.getComments().add(newComment);
+                                    commentAdded = true;
+                                    break;
+
                                 }
 
 
                             }
+                            if (commentAdded == true) {
+                                break;
+                            }
 
-                        } else {
-                            System.out.println("Invalid input, try again");
                         }
 
+                    }
+                    if (commentAdded == false) {
+                        System.out.println("Invalid input, try again");
                     }
                     break;
 

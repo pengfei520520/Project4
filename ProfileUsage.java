@@ -201,7 +201,7 @@ public class ProfileUsage {
                 //Allows user to pick an action to do on profile
                 System.out.println("Choose an option:\n1. Change name of your profile\n2. Change age on your profile");
                 System.out.println("3. Change your gender on your profile\n4. Change your password of your profile");
-                System.out.println("5. Access Social Media App\n6. Exit");
+                System.out.println("5. Access Social Media App\n6. Delete your account\n7. Exit");
                 optionString = scanner.nextLine();
 
                 //Grabs ASCII value of first character chosen to check if it is a number between 1 and 8.
@@ -209,7 +209,7 @@ public class ProfileUsage {
                 int ascii = optionChar;
 
                 //Selection structure that occurs if number 1-8 was not chosen
-                if (ascii < 49 || ascii > 54 || optionString.length() < 1) {
+                if (ascii < 49 || ascii > 55 || optionString.length() < 1) {
                     System.out.println("Choose an option 1-6!");
                 } else {
                     break;
@@ -322,6 +322,8 @@ public class ProfileUsage {
                PostDriver driver = new PostDriver(userProfile);
 
             } else if (option == 6) {
+                profileList.remove(userProfile);
+            } else if (option == 7) {
                 System.out.println("Logging out");
                 usage.saveAllProfiles(profileList);
                 return;
