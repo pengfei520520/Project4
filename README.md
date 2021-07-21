@@ -102,3 +102,11 @@ Typically, it would update the timestamp when importing and export all posts to 
 
 PostCSVHandler would handle all exceptional cases like file not found or malformated file.
 
+SearchCommentPost Class JuntaoShi 
+
+This class allows users to search comments and posts based on user name. In this class, the main goal is to create a method called searchPosts. A constructor is provided with arrarylist<Post> posts as input. Based on a array list, the full size of all comments are initialized. And then the upper case arrays for posts' names and comments' names are created. With this we can easily compare any words entered with that arrays ignoring cases. Then two for loops with filter and print out the matched posts with title, name and content. The comment section will filter out all the comments with the matched author name. Name and content will be printed. 
+
+In the main control, an arraylist of posts are input and call this method. Multiple tests on this class validates the functionality of this class. Locgically, all strings entered with digits, white space or null pointer will be dismissed and be asked to enter correct string again until corret. A do while loop outside will make sure you can search comments and posts multiple times. A error message will also pop out when no author is found. 
+
+It is a seperate class from other classes except PostDriver. It can be called from the control class -- PostDriver with one parameter.
+
