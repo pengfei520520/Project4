@@ -27,6 +27,7 @@ public class SearchCommentPost {
     }
 
     public void searchPosts() {
+        int a = 0;
         String[] upperCasePostsNmaes = new String[posts.size()]; //convert everything in author to upper case
         int x = 0;
         for (int i = 0; i < posts.size(); i++) {
@@ -37,26 +38,18 @@ public class SearchCommentPost {
         }
         System.out.println("Enter the name you are searching"); // check valid numbers are entered .
         String authorName = scan.nextLine().toUpperCase();
-        while (!authorName.matches("^[ A-Za-z]+$")) {
-            System.out.println("Only characters and space are allowed to enter!\n" +
-                    "Enter the name you are searching");
-            authorName = scan.nextLine().toUpperCase();
-        }
         for (int i = 0; i < posts.size(); i++) { //print out all the posts related with their title, name, and content.
             // NO timestamps are included.
             if (upperCasePostsNmaes[i].contains(authorName) && !authorName.isBlank()) {
                 System.out.println("Author name: " + posts.get(i).getAuthor() + "\nTitle: " +
-                        posts.get(i).getTitle() + "\nContent: " + posts.get(i).getContent());
+                        posts.get(i).getTitle() + "\nContent: " + posts.get(i).getContent() + "\n");
                 found = true;
             }
-        }
-        int a = 0;
-        for (int i = 0; i < posts.size(); i++) {                                //print comments with name and content
-            for (int j = 0; j < posts.get(i).getComments().size(); j++) {
+            for (int j = 0; j < posts.get(i).getComments().size(); j++) {                       //print comments after
                 if (upperCaseCommentsNmaes[a++].contains(authorName) && !authorName.isBlank()) {
                     System.out.println("Comment author: " +
                             posts.get(i).getComments().get(j).getAuthor() + "\nContent: " +
-                            posts.get(i).getComments().get(j).getContent());
+                            posts.get(i).getComments().get(j).getContent() + "\n");
                     found = true;
                 }
             }
