@@ -1,5 +1,7 @@
 # Project4
 
+In order to use this program, compile and run ProfileUsage.java.
+
 
 CommentEditor Class, Greg Keller
 
@@ -15,7 +17,7 @@ under the correct post by the correct author, and the current profile must be th
 of the comment and then we can delete it.
 
 This class interacts closely with the profile and post classes as they uses getters from both classes
-as it needs to access information about the current user and the post prompted by the user
+as it needs to access information about the current user and the post prompted by the user.
 
 to verify it works we had to test creating multiple profiles and see whether or not we are able to create comments
-and properly find the post that we would like to comment on
+and properly find the post that we would like to comment on.
