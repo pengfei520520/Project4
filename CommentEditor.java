@@ -106,8 +106,9 @@ public class CommentEditor {
                             System.out.println("What is the content of the comment would you like to edit?");
                             String commentContent = s.nextLine();
                             for (int i = 0; i < post.getComments().size(); i++) {
-                                //check if the content of the comment is contained in the list of comments for this post
-                                //and the author of the comment is the current user then get new input and set to that
+                                //check if the content of the comment is contained in the list of comments for this
+                                // post and the author of the comment is the current user then get new input and set
+                                // to that
                                 if (post.getComments().get(i).getContent().equalsIgnoreCase(commentContent)
                                         && post.getComments().get(i).getAuthor().equals(profile.getName())) {
                                     System.out.println("What would you like the new comment to say?");
