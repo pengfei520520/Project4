@@ -25,17 +25,10 @@ public class PostDriver {
         do {
 
             //menu
-            System.out.println("""
-                    What would you like to do?
-                    (1) New Post
-                    (2) Edit post
-                    (3) Delete post
-                    (4) View All Posts
-                    (5) Search for all of a user's posts and comments
-                    (6) Create, edit, or delete a comment
-                    (7) Import post
-                    (8) Export post
-                    (9) Exit""");
+            System.out.println("What would you like to do?\n(1) New Post\n(2) Edit post\n(3) Delete post\n" +
+                    "(4) View All Posts\n(5) Search for all of a user's posts and comments\n" +
+                    "(6) Create, edit, or delete a comment\n(7) Import post\n(8) Export post\n" +
+                    "(9) Exit");
             String input = scan.nextLine(); //input from user
 
             switch (input) {
@@ -67,6 +60,7 @@ public class PostDriver {
                 case "2":
                     int counter; //counter variable
                     int input1 = 0; //input from user for post selection
+                    String input1String; //input as a string
                     ArrayList<Post> userPosts = new ArrayList<>();
                     ArrayList<Integer> userPostNum = new ArrayList<>();
 
@@ -86,8 +80,17 @@ public class PostDriver {
                         if (counter == 0) {
                             System.out.println("You have no posts to edit.");
                         } else {
-                            input1 = scan.nextInt();
-                            scan.nextLine();
+                            boolean valid;
+                            do {
+                                valid = true;
+                                input1String = scan.nextLine();
+                                try {
+                                    input1 = Integer.parseInt(input1String);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Invalid input. Try again");
+                                    valid = false;
+                                }
+                            } while (!valid);
                         }
 
                         if (counter != 0 && (input1 < 1 || input1 > counter)) {
@@ -148,6 +151,7 @@ public class PostDriver {
                 case "3":
                     int counter2; //counter variable
                     int input2 = 0; //input from user for post selection
+                    String input2String; //input 2 as a string
                     ArrayList<Integer> userPostNum2 = new ArrayList<>();
 
                     //gets a list of posts that the user is allowed to delete
@@ -165,8 +169,17 @@ public class PostDriver {
                         if (counter2 == 0) {
                             System.out.println("You have no posts to delete.");
                         } else {
-                            input2 = scan.nextInt();
-                            scan.nextLine();
+                            boolean valid2;
+                            do {
+                                valid2 = true;
+                                input2String = scan.nextLine();
+                                try {
+                                    input2 = Integer.parseInt(input2String);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Invalid input. Try again");
+                                    valid2 = false;
+                                }
+                            } while (!valid2);
                         }
 
                         if (counter2 != 0 && (input2 < 1 || input2 > counter2)) {
