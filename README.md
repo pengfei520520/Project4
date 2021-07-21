@@ -79,3 +79,7 @@ as it needs to access information about the current user and the post prompted b
 
 to verify it works we had to test creating multiple profiles and see whether or not we are able to create comments
 and properly find the post that we would like to comment on.
+
+
+
+
