@@ -12,15 +12,26 @@ import java.util.Scanner;
 public class SearchCommentPost {
     private ArrayList<Post> posts = new ArrayList<Post>();
     Scanner scan = new Scanner(System.in);
-
+    String[] upperCaseCommentsNmaes;
+    int size;
+    boolean found = false;
     public SearchCommentPost(ArrayList<Post> posts) {
         this.posts = posts;
+        size = 0;
+        for (int i = 0; i < posts.size(); i++) {
+            size += posts.get(i).getComments().size();
+        }
+        upperCaseCommentsNmaes = new String[size];
     }
 
     public void searchPosts() {
         String[] upperCasePostsNmaes = new String[posts.size()]; //convert everything in author to upper case
+        int x = 0;
         for (int i = 0; i < posts.size(); i++) {
             upperCasePostsNmaes[i] = posts.get(i).getAuthor().toUpperCase();
+            for (int j = 0; j < posts.get(i).getComments().size(); j++) {
+                upperCaseCommentsNmaes[x++] = posts.get(i).getComments().get(j).getAuthor().toUpperCase();
+            }
         }
         System.out.println("Enter the name you are searching"); // check valid numbers are entered .
         String authorName = scan.nextLine().toUpperCase();
@@ -31,21 +42,25 @@ public class SearchCommentPost {
         }
         for (int i = 0; i < posts.size(); i++) { //print out all the posts related with their title, name, and content.
             // NO timestamps are included.
-            if (upperCasePostsNmaes[i].contains(authorName) && !authorName.equals(" ")) {
+            if (upperCasePostsNmaes[i].contains(authorName) && !authorName.isBlank()) {
                 System.out.println("Author name: " + posts.get(i).getAuthor() + "\nTitle: " +
                         posts.get(i).getTitle() + "\nContent: " + posts.get(i).getContent());
-                if (posts.get(i).getComments().size() > 0) {
-                    System.out.print("Here are the comments on this post: ");
-                }
-                for (int j = 0; j < posts.get(i).getComments().size(); j++) { //print out all the comments related
-                    int plusOne = j + 1;
-                    System.out.println("No." + plusOne + ":" + " Comment author: " +
+                found = true;
+            }
+        }
+        int a = 0;
+        for (int i = 0; i < posts.size(); i++) {                                //print comments with name and content
+            for (int j = 0; j < posts.get(i).getComments().size(); j++) {
+                if (upperCaseCommentsNmaes[a++].contains(authorName) && !authorName.isBlank()) {
+                    System.out.println("Comment author: " +
                             posts.get(i).getComments().get(j).getAuthor() + "\nContent: " +
                             posts.get(i).getComments().get(j).getContent());
+                    found = true;
                 }
-            } else if (!upperCasePostsNmaes[i].contains(authorName)) { //print out the not found reminder
-                System.out.println("This author name is not found.");
             }
+        }
+        if (!found) {
+            System.out.println("This author not found!");
         }
     }
 
