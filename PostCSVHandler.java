@@ -9,14 +9,6 @@ import java.util.Scanner;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-/**
- * imports and exports posts as csv file
- *
- * <p>Purdue University -- CS18000 -- Summer 2021</p>
- *
- * @author Pengfei
- * @version July 18, 2021
- */
 
 public class PostCSVHandler {
 
